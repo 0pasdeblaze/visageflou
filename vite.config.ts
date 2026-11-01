@@ -3,9 +3,7 @@ import { readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { defineConfig, type Plugin, type ResolvedConfig } from 'vite';
 
-// Same policy the Caddyfile sends as a header; the meta copy keeps it in force
-// if the built site is opened from disk or served by something else.
-// 'self' for connect-src is only needed to load the model and WASM runtime.
+// Same CSP as deploy/Caddyfile (keep in sync). connect-src 'self' is only needed to load the model and WASM.
 const CSP = [
   "default-src 'none'",
   "script-src 'self' 'wasm-unsafe-eval'",
@@ -24,8 +22,7 @@ const csp = (): Plugin => ({
     html.replace('<head>', `<head>\n    <meta http-equiv="Content-Security-Policy" content="${CSP}" />`),
 });
 
-// ONNX Runtime's bundle makes Vite emit its own copy of the WASM; we load ours
-// from public/ort via env.wasm.wasmPaths, so drop the unused 14 MB duplicate.
+// ORT's bundle makes Vite emit its own WASM copy; we load ours from public/ort, so drop the duplicate.
 const dropBundledWasm = (): Plugin => ({
   name: 'drop-bundled-wasm',
   generateBundle(_, bundle) {
@@ -33,8 +30,7 @@ const dropBundledWasm = (): Plugin => ({
   },
 });
 
-// Writes dist/sw.js from src/sw.template.js with the list of built files, so the site
-// (including the 22 MB model and WASM runtime) is cached and works offline.
+// Writes dist/sw.js from src/sw.template.js with the list of built files.
 const offline = (): Plugin => {
   let config: ResolvedConfig;
   return {

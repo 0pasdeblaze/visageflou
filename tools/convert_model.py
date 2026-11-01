@@ -1,9 +1,4 @@
-"""Rend le modèle CenterFace de deface utilisable avec onnxruntime-web.
-
-Le fichier d'origine a une entrée fixe 10x3x32x32 et déclare chaque poids comme
-entrée du graphe, ce qui fait protester ONNX Runtime et empêche de traiter des
-images de taille quelconque. Ce script rend lot/hauteur/largeur dynamiques et
-retire les initialiseurs des entrées.
+"""Rend le modèle CenterFace de deface utilisable avec onnxruntime-web (taille d'image dynamique).
 
     pip install onnx
     curl -L -o centerface.onnx https://raw.githubusercontent.com/ORB-HD/deface/master/deface/centerface.onnx
@@ -24,10 +19,10 @@ def main(src: str, dst: str) -> None:
     inputs, outputs = dims(model.graph.input), dims(model.graph.output)
     inputs['input.1'] = ['B', 3, 'H', 'W']
     outputs.update({
-        '537': ['B', 1, 'h', 'w'],   # carte de chaleur
-        '538': ['B', 2, 'h', 'w'],   # échelle
-        '539': ['B', 2, 'h', 'w'],   # décalage
-        '540': ['B', 10, 'h', 'w'],  # points de repère
+        '537': ['B', 1, 'h', 'w'],   # heatmap
+        '538': ['B', 2, 'h', 'w'],   # scale
+        '539': ['B', 2, 'h', 'w'],   # offset
+        '540': ['B', 10, 'h', 'w'],  # landmarks
     })
     model = update_inputs_outputs_dims(model, inputs, outputs)
 

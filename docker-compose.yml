@@ -7,11 +7,10 @@ services:
       - "443:443"
       - "443:443/udp"
     environment:
-      # Nom de domaine pour un HTTPS géré par Caddy ; ":8080" derrière un reverse proxy.
       SITE_ADDRESS: "${SITE_ADDRESS:-visageflou.fr}"
     read_only: true
     volumes:
-      # Les certificats doivent survivre aux redémarrages (limites de Let's Encrypt).
+      # keeps certificates across restarts (Let's Encrypt rate limits)
       - caddy_data:/data
     tmpfs:
       - /config
