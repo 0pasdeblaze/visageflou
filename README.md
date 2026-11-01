@@ -1,7 +1,7 @@
 # visageflou
 
-Le projet est 95% vibecodé, outil pratique pour flouter facilement et rapidement un grand nombre de visages sur photos. le site est une page statique, aucune donnée ne quitte l'appareil de l'utilisateur.
-
+site destiné au floutage de visages sur des photos. le site est une page statique, aucune donnée ne quitte l'appareil de l'utilisateur.
+Projet 95% codé avec claude Opus 5.5
 ## Fonctionnalités
 - Détection automatique des visages, sur plusieurs images à la fois
 - Flou gaussien, pixelisation ou aplat noir, avec réglages de force, de marge, de bord et de forme
