@@ -32,6 +32,9 @@ body {
 .workspace { flex: 1; min-width: 0; display: flex; flex-direction: column; padding-right: calc(var(--panel-w) + var(--panel-gap)); }
 .foot { padding: 14px 24px; border-top: 1px solid var(--border); text-align: center; color: var(--muted); font-size: 13px; }
 .foot p { margin: 0; }
+.foot p + p { margin-top: 4px; }
+.foot a { color: var(--accent-dark); font-weight: 500; text-decoration: none; }
+.foot a:hover { text-decoration: underline; }
 
 /* ---- toolbar (left) ---- */
 .toolbar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 14px; }
