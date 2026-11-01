@@ -13,6 +13,9 @@ Site statique de floutage de visages, entièrement côté client. Images uniquem
 - Plusieurs images : chaque image est un `Doc` (flous, historique, analyse). Seule l'image affichée garde ses pixels décodés en mémoire ; la détection et l'export décodent une image à la fois.
 - Confidentialité de l'export : jamais d'export d'une image dont la détection n'est pas terminée ; confirmation si une image n'a aucun flou.
 
+- Hors ligne : `src/sw.template.js` est transformé en `dist/sw.js` par le plugin `offline` de `vite.config.ts` (liste des fichiers + empreinte de version). Le service worker précharge tout (≈ 22 Mo, ≈ 11 Mo transférés). Points d'attention appris en test : télécharger avec `cache: 'no-store'` (sinon `ERR_CACHE_WRITE_FAILURE` quand la page télécharge le même fichier en parallèle) et `ignoreVary` dans `cache.match`. `/`, `/index.html` et `/sw.js` doivent rester `no-cache` côté serveur.
+- Interface : thème clair uniquement (texte noir sur fond blanc, bleu UniFi `#006fff`, ombres sous les boutons). Barre d'outils à gauche, zone de dépôt carrée centrée sur la page, réglages dans une carte flottante à droite (`position: fixed`).
+
 ## Commandes
 - `npm install` (le postinstall copie le moteur WASM d'ORT dans `public/ort/`, ignoré par git)
 - `npm run dev` / `npm run build` / `npm run preview`

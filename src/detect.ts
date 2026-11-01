@@ -11,7 +11,10 @@ const MAX_SIDE = 2560;
 let session: Promise<ort.InferenceSession> | undefined;
 
 function getSession() {
-  session ??= ort.InferenceSession.create(MODEL_URL, { executionProviders: ['wasm'], logSeverityLevel: 3 });
+  session ??= ort.InferenceSession.create(MODEL_URL, { executionProviders: ['wasm'], logSeverityLevel: 3 }).catch((err) => {
+    session = undefined; // do not cache a failed load: the next image or a retry must try again
+    throw err;
+  });
   return session;
 }
 

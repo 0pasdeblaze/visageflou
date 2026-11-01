@@ -680,6 +680,15 @@ $('file').addEventListener('change', (e) => {
   input.value = '';
   if (files.length) void addFiles(files);
 });
+const openPicker = () => $<HTMLInputElement>('file').click();
+$('open').addEventListener('click', openPicker);
+$('empty').addEventListener('click', openPicker);
+$('empty').addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' || e.key === ' ') {
+    e.preventDefault();
+    openPicker();
+  }
+});
 $('detect').addEventListener('click', () => {
   // Re-run from the cached analysis if we have one; manual blurs are kept either way.
   const d = current;
@@ -738,3 +747,10 @@ window.addEventListener('drop', (e) => {
 });
 
 refreshUi();
+
+// Offline support: the service worker is generated at build time (see vite.config.ts).
+if (import.meta.env.PROD && 'serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register(`${import.meta.env.BASE_URL}sw.js`).catch((err) => console.error(err));
+  });
+}

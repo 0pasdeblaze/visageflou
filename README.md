@@ -12,7 +12,8 @@ Floutage de visages qui s'exécute entièrement dans votre navigateur. Ouvrez un
 - Dessiner, sélectionner, déplacer, redimensionner et supprimer des flous
 - Export en pleine résolution (JPEG ou PNG) sans métadonnées EXIF, position GPS comprise : image par image, ou toutes d'un coup dans une archive `.zip`
 - Garde-fous : l'export est bloqué tant que la détection n'est pas terminée, et une confirmation est demandée pour une image sans aucun flou
-- Interface en français
+- Interface en français, style clair proche de l'interface UniFi
+- Fonctionne sans connexion après le premier chargement (un service worker met le site, le moteur et le modèle en cache)
 
 Raccourcis : `V` sélection, `A` ajouter un flou, `Suppr` supprimer, `Ctrl/Cmd+Z` annuler (avec `Maj` : rétablir), `←` / `→` changer d'image.
 
@@ -35,7 +36,7 @@ L'image est un serveur [Caddy](https://caddyserver.com) en lecture seule qui ne 
 
 Variable `SITE_ADDRESS` (par défaut `visageflou.fr`) : mettez `:8080` pour servir en HTTP simple derrière un reverse proxy qui termine le TLS (et adaptez alors les ports dans `docker-compose.yml`).
 
-Mise à jour : `git pull && docker compose up -d --build`.
+Mise à jour : `git pull && docker compose up -d --build`. Les visiteurs reçoivent la nouvelle version au rechargement suivant (le service worker se met à jour en arrière-plan).
 
 Les journaux du conteneur sont désactivés (`logging: driver: none`) pour ne conserver aucune adresse IP. Pour déboguer un premier déploiement, commentez temporairement cette ligne.
 
