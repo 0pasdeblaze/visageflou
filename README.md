@@ -47,3 +47,6 @@ Les journaux du conteneur sont désactivés (`logging: driver: none`) pour ne co
 
 ## Modèle
 `public/models/centerface-dynamic.onnx` est le modèle CenterFace de [deface](https://github.com/ORB-HD/deface), converti avec `tools/convert_model.py` (dimensions d'entrée dynamiques, poids retirés des entrées du graphe). Voir `THIRD_PARTY_NOTICES.md`.
+
+## Licence
+Code publié sous licence [MIT](LICENSE). Les composants tiers (modèle CenterFace, ONNX Runtime) conservent leur propre licence, voir `THIRD_PARTY_NOTICES.md`.
