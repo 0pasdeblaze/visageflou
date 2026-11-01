@@ -5,11 +5,16 @@ Le projet est 95% vibecodé, outil pratique pour flouter facilement et rapidemen
 Floutage de visages qui s'exécute entièrement dans votre navigateur. Ouvrez une image, les visages sont détectés sur votre appareil, réglez le flou, ajoutez / déplacez / supprimez des flous à la main, puis exportez. Rien n'est envoyé sur un serveur.
 
 ## Fonctionnalités
+- Plusieurs images à la fois : chacune a ses propres flous et son propre historique annuler / rétablir
 - Détection automatique des visages (CenterFace) avec un curseur de sensibilité
 - Flou gaussien, pixelisation ou aplat noir ; curseurs de force, de marge, de bord adouci et de forme (ellipse / rectangle)
 - Réglage du type et de la force propre à chaque flou
-- Dessiner, sélectionner, déplacer, redimensionner et supprimer des flous ; annuler / rétablir
-- Export en pleine résolution (JPEG ou PNG) sans métadonnées EXIF, position GPS comprise
+- Dessiner, sélectionner, déplacer, redimensionner et supprimer des flous
+- Export en pleine résolution (JPEG ou PNG) sans métadonnées EXIF, position GPS comprise : image par image, ou toutes d'un coup dans une archive `.zip`
+- Garde-fous : l'export est bloqué tant que la détection n'est pas terminée, et une confirmation est demandée pour une image sans aucun flou
+- Interface en français
+
+Raccourcis : `V` sélection, `A` ajouter un flou, `Suppr` supprimer, `Ctrl/Cmd+Z` annuler (avec `Maj` : rétablir), `←` / `→` changer d'image.
 
 ## Développement
 ```
