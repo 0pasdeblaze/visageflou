@@ -35,3 +35,8 @@
 	@static path /ort/* /models/*
 	header @static Cache-Control "public, max-age=86400"
 }
+
+# www redirige vers le domaine principal (supprimer ce bloc derrière un reverse proxy).
+www.visageflou.fr {
+	redir https://visageflou.fr{uri} permanent
+}
