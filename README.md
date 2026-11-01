@@ -18,15 +18,21 @@ npm run dev
 npm test
 ```
 
-## Déploiement
+## Déploiement (VPS)
+Prérequis : un VPS avec Docker, un enregistrement DNS `A` (et `AAAA` si le VPS a une IPv6) de `visageflou.fr` vers le VPS, et les ports 80 et 443 ouverts.
+
 ```
+git clone git@github.com:0pasdeblaze/visageflou.git && cd visageflou
 docker compose up -d --build
 ```
-L'image est un serveur [Caddy](https://caddyserver.com) en lecture seule qui ne sert que des fichiers statiques (pas de journaux d'accès, méthodes autres que GET refusées, en-têtes de sécurité définis dans `deploy/Caddyfile`).
 
-Renseignez `SITE_ADDRESS` dans `docker-compose.yml` :
-- un nom de domaine (par exemple `visageflou.fr`) pour un HTTPS géré par Caddy ; les ports 80 et 443 doivent atteindre le conteneur et le DNS doit pointer vers lui
-- `:8080` (par défaut) lorsqu'un reverse proxy placé devant termine le TLS
+L'image est un serveur [Caddy](https://caddyserver.com) en lecture seule qui ne sert que des fichiers statiques (pas de journaux d'accès, méthodes autres que GET refusées, en-têtes de sécurité définis dans `deploy/Caddyfile`). Caddy obtient et renouvelle seul le certificat HTTPS ; il est conservé dans le volume `caddy_data`.
+
+Variable `SITE_ADDRESS` (par défaut `visageflou.fr`) : mettez `:8080` pour servir en HTTP simple derrière un reverse proxy qui termine le TLS (et adaptez alors les ports dans `docker-compose.yml`).
+
+Mise à jour : `git pull && docker compose up -d --build`.
+
+Les journaux du conteneur sont désactivés (`logging: driver: none`) pour ne conserver aucune adresse IP. Pour déboguer un premier déploiement, commentez temporairement cette ligne.
 
 ## Confidentialité
 - Les photos sont décodées, analysées et floutées dans la page ; il n'existe aucun point d'envoi de fichiers.
