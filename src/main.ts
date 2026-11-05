@@ -688,6 +688,16 @@ const help = $<HTMLDialogElement>('help');
 $('help-open').addEventListener('click', () => help.showModal());
 $('help-close').addEventListener('click', () => help.close());
 help.addEventListener('click', (e) => { if (e.target === help) help.close(); });
+
+// Open the overlay on the first visit only (remembered in this browser; storage may be unavailable).
+try {
+  if (!localStorage.getItem('help-seen')) {
+    localStorage.setItem('help-seen', '1');
+    help.showModal();
+  }
+} catch {
+  /* storage blocked: skip the automatic opening */
+}
 $('empty').addEventListener('click', openPicker);
 $('empty').addEventListener('keydown', (e) => {
   if (e.key === 'Enter' || e.key === ' ') {
