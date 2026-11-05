@@ -13,6 +13,7 @@
     <div class="app">
     <header class="top">
       <h1>Visageflou</h1>
+      <button id="help-open" class="btn" type="button">Comment ça marche ?</button>
     </header>
 
     <main class="layout">
@@ -120,5 +121,35 @@
       <p><a href="https://github.com/0pasdeblaze/visageflou" target="_blank" rel="noopener noreferrer">Code source sur GitHub</a></p>
     </footer>
     </div>
+
+    <dialog id="help" class="help" aria-labelledby="help-title">
+      <div class="help-head">
+        <h2 id="help-title">Comment ça marche ?</h2>
+        <button id="help-close" class="btn small-btn" type="button">Fermer</button>
+      </div>
+      <!-- CONTENU DE L'EXPLICATION : modifiez librement le texte ci-dessous. -->
+      <div class="help-body">
+        <div class="help-text">
+        <h3>Bienvenue sur visageflou</h3>
+        <p>Visageflou est un site dédié au floutage de visages sur vos photos. tout se passe en local sur votre ordinateur, pas de cookies, pas de transfert de données, rien n'est envoyé et tout reste chez vous!</p>
+
+        <h3>1. Ajoutez vos photos</h3>
+        <p>Déposez une ou plusieurs images dans le grand carré, ou cliquez dessus pour les choisir.</p>
+
+        <h3>2. Les visages sont repérés tout seuls</h3>
+        <p>Un petit programme d'intelligence artificielle open source et gratuit, téléchargé une seule fois au premier chargement de la page, detecte les visages sur vos photos.</p>
+
+        <h3>3. Réglez le flou</h3>
+        <p>Choisissez le type de flou, sa force et sa forme. Vous pouvez aussi ajouter, déplacer ou supprimer un cadre à la main.</p>
+
+        <h3>4. Exportez</h3>
+        <p>Enregistrez les images une par une ou toutes ensemble dans un fichier .zip. Les informations cachées dans les photos (position GPS, date) sont supprimées.</p>
+        </div>
+        <figure class="help-figure">
+          <img src="/schema.png" width="1152" height="1400" alt="Schéma : le serveur envoie le site au navigateur, puis la détection des visages, le floutage et l'export se font uniquement sur votre ordinateur." loading="lazy" />
+        </figure>
+      </div>
+    </dialog>
+
   </body>
 </html>

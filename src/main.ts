@@ -682,6 +682,12 @@ $('file').addEventListener('change', (e) => {
 });
 const openPicker = () => $<HTMLInputElement>('file').click();
 $('open').addEventListener('click', openPicker);
+
+// "Comment ça marche ?" overlay: a native <dialog> (Esc closes it, focus is trapped).
+const help = $<HTMLDialogElement>('help');
+$('help-open').addEventListener('click', () => help.showModal());
+$('help-close').addEventListener('click', () => help.close());
+help.addEventListener('click', (e) => { if (e.target === help) help.close(); });
 $('empty').addEventListener('click', openPicker);
 $('empty').addEventListener('keydown', (e) => {
   if (e.key === 'Enter' || e.key === ' ') {
